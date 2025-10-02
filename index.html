@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scout Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      color: #4a5568;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: #718096;
+      font-size: 1.1rem;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid #667eea;
+    }
+
+    .card h2 {
+      color: #4a5568;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2 i {
+      font-size: 1.3em;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 8px 0;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: #f8fafc;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(45deg, #48bb78, #38a169);
+      color: white;
+    }
+
+    .btn-warning {
+      background: linear-gradient(45deg, #ed8936, #dd6b20);
+      color: white;
+    }
+
+    .btn-danger {
+      background: linear-gradient(45deg, #f56565, #e53e3e);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(45deg, #718096, #4a5568);
+      color: white;
+    }
+
+    .question-item {
+      background: #f8fafc;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border-left: 3px solid #48bb78;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: between;
+      align-items: start;
+      gap: 15px;
+    }
+
+    .question-text {
+      flex: 1;
+    }
+
+    .question-text strong {
+      color: #2d3748;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .question-text em {
+      color: #4a5568;
+      display: block;
+      background: #e2e8f0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    .backup-section {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+      <div class="logo">⚜️</div>
+      <h1>Scout quiz</h1>
+      <p class="subtitle">if you want you can add more question and answer</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats">
+      <div class="stat-card">
+        <span class="stat-number" id="totalQuestions">0</span>
+        Total Question
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="lastSaved">0</span>
+        Last Save
+      </div>
+    </div>
+
+    <!-- Add Question Section -->
+    <div class="card">
+      <h2>➕ Add New Question</h2>
+      <textarea id="q" placeholder="আপনার প্রশ্নটি এখানে লিখুন..."></textarea>
+      <input type="text" id="a" placeholder="সঠিক উত্তর লিখুন...">
+      
+      <div class="btn-group">
+        <button class="btn-primary" onclick="addQnA()">
+          <span>💾</span> save your question
+        </button>
+        <button class="btn-success" onclick="startQuiz()">
+          <span>🎮</span> start the quiz
+        </button>
+      </div>
+    </div>
+
+    <!-- Question Bank Section -->
+    <div class="card">
+      <h2>📚 প্রশ্ন ব্যাংক</h2>
+      <div id="bankList">
+        <p style="text-align: center; color: #718096; padding: 20px;">
+          কোনো প্রশ্ন যোগ করা হয়নি। প্রথম প্রশ্নটি যোগ করুন!
+        </p>
+      </div>
+    </div>
+
+    <!-- Backup & Management Section -->
+    <div class="card">
+      <h2>⚙️ Data Manegment </h2>
+      <div class="btn-group">
+        <button class="btn-warning" onclick="backupData()">
+          <span>💾</span> Backup
+        </button>
+        <button class="btn-secondary" onclick="importData()">
+          <span>📤</span> Data Import
+        </button>
+        <button class="btn-danger" onclick="resetAll()">
+          <span>🗑️</span> delete all data
+        </button>
+      </div>
+
+      <!-- Backup Section -->
+      <div id="backupSection" class="backup-section hidden">
+        <h3>📋 back up data</h3>
+        <textarea id="backupData" placeholder="ব্যাকআপ ডেটা এখানে পেস্ট করুন..." rows="4"></textarea>
+        <div class="btn-group">
+          <button class="btn-success" onclick="restoreData()">
+            <span>🔄</span> restart Data
+          </button>
+          <button class="btn-secondary" onclick="hideBackup()">
+            <span>❌</span> বন্ধ করুন
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let bank = JSON.parse(localStorage.getItem("quizBank")) || [];
+    
+    function addQnA(){
+      let q = document.getElementById("q").value.trim();
+      let a = document.getElementById("a").value.trim();
+      
+      if(q && a){
+        bank.push({q, a, id: Date.now()});
+        saveToStorage();
+        updateBankList();
+        document.getElementById("q").value = "";
+        document.getElementById("a").value = "";
+        showMessage("✅ প্রশ্ন সফলভাবে যোগ করা হয়েছে!");
+      } else {
+        showMessage("⚠️ দয়া করে প্রশ্ন এবং উত্তর both লিখুন");
+      }
+    }
+
+    function deleteQuestion(id){
+      if(confirm("আপনি কি এই প্রশ্নটি ডিলিট করতে চান?")){
+        bank = bank.filter(item => item.id !== id);
+        saveToStorage();
+        updateBankList();
+        showMessage("🗑️ প্রশ্ন ডিলিট করা হয়েছে");
+      }
+    }
+
+    function updateBankList(){
+      let container = document.getElementById("bankList");
+      document.getElementById("totalQuestions").textContent = bank.length;
+      
+      if(bank.length === 0){
+        container.innerHTML = `<p style="text-align: center; color: #718096; padding: 20px;">
+          কোনো প্রশ্ন যোগ করা হয়নি। প্রথম প্রশ্নটি যোগ করুন!
+        </p>`;
+        return;
+      }
+      
+      container.innerHTML = "";
+      
+      bank.forEach(item => {
+        let div = document.createElement("div");
+        div.className = "question-item";
+        div.innerHTML = `
+          <div class="question-header">
+            <div class="question-text">
+              <strong> ${item.q}</strong>
+              <em>✅ ${item.a}</em>
+            </div>
+            <button class="btn-danger" onclick="deleteQuestion(${item.id})" style="padding: 8px 12px;">
+              <span>Delete</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function saveToStorage(){
+      localStorage.setItem("quizBank", JSON.stringify(bank));
+      localStorage.setItem("lastSaved", new Date().toLocaleString('bn-BD'));
+      document.getElementById("lastSaved").textContent = bank.length;
+    }
+
+    function resetAll(){
+      if(confirm("⚠️ আপনি কি সব ডেটা ডিলিট করতে চান? এটি undo করা যাবে না!")){
+        localStorage.clear();
+        bank = [];
+        updateBankList();
+        showMessage(" সব ডেটা ডিলিট করা হয়েছে");
+      }
+    }
+
+    function backupData(){
+      const dataStr = JSON.stringify(bank, null, 2);
+      document.getElementById("backupData").value = dataStr;
+      document.getElementById("backupSection").classList.remove("hidden");
+      showMessage("💾 Backup Done");
+    }
+
+    function hideBackup(){
+      document.getElementById("backupSection").classList.add("hidden");
+    }
+
+    function importData(){
+      document.getElementById("backupSection").classList.remove("hidden");
+    }
+
+    function restoreData(){
+      const backupText = document.getElementById("backupData").value.trim();
+      try {
+        const importedData = JSON.parse(backupText);
+        if(Array.isArray(importedData)){
+          bank = importedData;
+          saveToStorage();
+          updateBankList();
+          document.getElementById("backupSection").classList.add("hidden");
+          showMessage("Data Reset Succesfull!");
+        }
+      } catch(e){
+        showMessage("❌ ভুল ডেটা ফরমেট। সঠিক JSON ডেটা পেস্ট করুন।");
+      }
+    }
+
+    function startQuiz(){
+      if(bank.length === 0){
+        showMessage("❌ প্রথমে কিছু প্রশ্ন যোগ করুন");
+        return;
+      }
+      window.open('quiz_runner.html', '_blank');
+    }
+
+    function showMessage(msg){
+      alert(msg);
+    }
+
+    // Initialize
+    updateBankList();
+    document.getElementById("lastSaved").textContent = bank.length;
+  </script>
+</body>
+</html>
